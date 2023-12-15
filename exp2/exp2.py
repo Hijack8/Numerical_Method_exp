@@ -9,7 +9,7 @@ def func(x, a, b, c):
 def readfile(filename):
     fans = []
 
-    with open("fans.txt", "r") as f:
+    with open(filename, "r") as f:
         lines = f.readlines()
         for line in lines:
             fans.append(int(line))
