@@ -50,7 +50,7 @@ def read_dat_file(filename):
 
         constants = np.array(constants)
 
-    return id, ver, id1, matrix, constants, q, p
+    return matrix, constants, q, p
 
 def gauss_elimination(A, b, p, q):
     n = len(A)
@@ -69,11 +69,18 @@ def gauss_elimination(A, b, p, q):
         x[i] = x[i] / A[i][i]
 
     return x
-def main():
-    filename = 'data20234.dat'
-    id, ver, id1, matrix, constants, q, p = read_dat_file(filename)
+
+def solve(filename):
+    matrix, constants, q, p = read_dat_file(filename)
     x = gauss_elimination(matrix, constants, q, p)
+    print(filename + " result:")
     print(x)
+def main():
+    solve("data20231.dat")
+    solve("data20232.dat")
+    solve("data20233.dat")
+    solve("data20234.dat")
+    # solve("data20235.dat")
 
 if __name__ == '__main__':
     main()

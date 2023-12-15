@@ -1,21 +1,16 @@
 import csv
-import pandas as pd
-
 import numpy as np
 import math
 import matplotlib.pyplot as plt
 
 x_list = []
 y_list = []
-h = []
-d = []
-C = []
-mu = []
-lam = []
-M = []
+
 # read CSV file
-def read_csv():
-    filename = 'sea2023.csv'
+def read_csv(filename):
+
+    x_list = []
+    y_list = []
     with open(filename, newline='') as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
@@ -23,6 +18,7 @@ def read_csv():
                 continue
             x_list.append(int(row[0]))
             y_list.append(float(row[1]))
+    return x_list, y_list
 
 def solve_eq(a, b, c, d, n):
     # LU decomposition
@@ -80,7 +76,10 @@ def cal_length(M, h):
     return s
 
 def main():
-    read_csv()
+    filename = 'sea2023.csv'
+    global x_list, y_list
+    x_list, y_list = read_csv(filename)
+
     # n+1 dots
     n = len(x_list) - 1
 
@@ -102,9 +101,10 @@ def main():
     # if M0=0 and Mn=0 solve this equations
     M = solve_eq(mu, C, lam, d, n - 1)
     M.append(0) # Mn=0
-    plot_this_func(M, h)
     print(cal_length(M, h))
+    plot_this_func(M, h)
 
 
-main()
+if __name__ == '__main__':
+    main()
 
