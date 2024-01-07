@@ -9,10 +9,12 @@ def phi0(x):
 def phi1(x):
     # return 1 / np.exp(0.1 * x)
     # return 1 / x ** 0.65
-    return 1 / x
+    # return 1 / x
+    return 1 / np.exp(x)
 # 定义函数phi2，接受一个参数x，返回1除以x的结果
 def phi2(x):
-    return 1 / x ** 2
+    # return 1 / x ** 2
+    return 1 / np.exp(x)
 
 # 定义函数f，接受一个参数x，返回数组ys中x-1位置的元素
 def f(x):
@@ -71,7 +73,6 @@ def main():
     # 执行最小二乘法拟合
     A, b = least_squares(functions, n, xs)
     c = (np.linalg.inv(A).dot(b))  # 计算系数
-    print(c)
     x2 = linspace(1, 100, 1000)  # 生成一个线性空间，用于绘制拟合曲线
     y2 = []
     # 计算拟合曲线的y坐标
@@ -81,6 +82,7 @@ def main():
             y2i += c[j][0] * functions["phi"+str(j)](i)
         y2.append(y2i)
     plt.plot(x2, y2)  # 绘制拟合曲线
+    plt.title("Final number of fans:"+str(c[0][0]))
     plt.plot(x, fans, "+")  # 在相同的图上绘制原始数据点
     plt.show()  # 显示图像
 
