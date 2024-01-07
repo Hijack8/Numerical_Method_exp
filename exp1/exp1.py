@@ -57,7 +57,7 @@ def f(x, M, h):
            (y_list[i] - M[i] * h[i] * h[i] / 6) * (x - x_list[i - 1]) / h[i]
 
 # 绘制三次样条插值曲线和原始数据点
-def plot_this_func(M, h):
+def plot_this_func(M, h, len):
     x = np.arange(x_list[0], x_list[-1], 0.1)
     y = []
 
@@ -68,6 +68,7 @@ def plot_this_func(M, h):
     plt.plot(x_list, y_list, '+', label="initial points")
     plt.xlabel("x")
     plt.ylabel("y")
+    plt.title("Cubic spline interpolation curve(Curve length =" + str(len) + ")")
     plt.legend()
     plt.show()
 
@@ -109,8 +110,9 @@ def main():
     M.append(0)  # Mn=0
 
     # 计算插值曲线长度并绘制图形
-    print(cal_length(M, h))
-    plot_this_func(M, h)
+    # print(cal_length(M, h))
+    length = cal_length(M, h)
+    plot_this_func(M, h, length)
 
 if __name__ == '__main__':
     main()
